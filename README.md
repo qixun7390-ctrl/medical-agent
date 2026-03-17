@@ -1,4 +1,4 @@
-﻿# Medical Agent - 医疗健康智能问答系统
+<img width="3348" height="1386" alt="deepseek_mermaid_20260317_bd97a4" src="https://github.com/user-attachments/assets/8165f7c0-b1f5-45c9-8ea1-066e2e4bd544" />﻿# Medical Agent - 医疗健康智能问答系统
 
 一个基于 LangGraph + vLLM 的医疗健康智能问答系统。系统采用 **规则优先 + RAG 增强** 的混合架构，通过精确的数值规则层解决大模型对医疗数值不敏感及检索歧义问题，并实现会话记忆与上下文工程的结构化控制。
 
@@ -9,12 +9,14 @@
 - 规则层：核心创新
 - 上下文工程
 - RAG 检索与知识图谱
+- 三级记忆系统
 - SSE 流式输出
 - 快速开始
 - Docker 部署
 - 评测与指标
 - FAQ
 - API 参考
+- 结果展示
 - 项目结构
 - 许可证
 
@@ -81,6 +83,49 @@ flowchart LR
 - `E:\PythonProject2\app\storage\vector_store.py`
 - `E:\PythonProject2\app\kg\graph_store.py`
 
+## 三级记忆架构
+
+系统实现了类人的三层记忆管理，确保长对话的连贯性与关键信息的持久化。
+
+### 1. 工作记忆 (Working Memory)
+- **存储内容**：当前会话轮次的完整对话历史
+- **实现方式**：`state.history` 列表存储
+- **生命周期**：单次会话期间
+- **处理策略**：根据 Token 预算动态分割为“近期对话”和“历史摘要”
+
+### 2. Episodic 记忆 (Episodic Memory)
+- **存储内容**：跨会话的关键信息摘要（如患者年龄、过敏史、既往病史）
+- **实现方式**：`state.episodic_summary` 字符串存储
+- **生命周期**：跨多次会话（持久化）
+- **处理策略**：每次会话结束时更新摘要，下次会话开始时自动加载
+
+### 3. 语义记忆 (Semantic Memory)
+- **存储内容**：医学知识图谱（疾病、症状、药物关系）
+- **实现方式**：`app/kg/graph_store.py` + NetworkX
+- **生命周期**：永久存储
+- **处理策略**：RAG 检索时同步查询知识图谱，补充结构化医学知识
+
+### 记忆压缩与预算控制
+```python
+# 示例：工作记忆的动态分割
+recent = []  # 近期完整对话
+used = 0
+for line in reversed(history_lines):
+    t = estimate_tokens(line)
+    if used + t > self.history_budget:
+        break
+    recent.append(line)
+    used += t
+
+older = history_lines[: -len(recent)]  # 旧对话需要压缩
+summary = _compress_history(older)     # 压缩成摘要
+
+# 合并 Episodic 记忆
+if state.episodic_summary:
+    summary = state.episodic_summary + " | " + summary
+
+<img width="3348" height="1386" alt="deepseek_mermaid_20260317_bd97a4" src="https://github.com/user-attachments/assets/d99f9d90-4f4f-429a-9a73-780372ca6260" />
+
 ## SSE 流式输出
 SSE 先发送证据，再逐段返回答案，避免证据链错位。
 
@@ -144,6 +189,10 @@ python -m uvicorn app.main:create_app --factory --host 0.0.0.0 --port 8000
 - `POST /api/chat_stream`
 - `POST /api/debug_rules`
 - `GET /api/cache_stats`
+
+## 结果展示:
+<img width="1905" height="908" alt="a59419dad7d049c22f96708b9cc40627" src="https://github.com/user-attachments/assets/560e9919-8336-49a7-8431-10d47f114152" />
+<img width="1855" height="440" alt="0a6d837aaff356db86156783a81e1d4a" src="https://github.com/user-attachments/assets/a2217fdd-ae7f-4ce2-8072-4004fcc5f112" />
 
 ## 项目结构
 ```
