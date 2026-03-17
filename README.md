@@ -1,4 +1,4 @@
-<img width="3348" height="1386" alt="deepseek_mermaid_20260317_bd97a4" src="https://github.com/user-attachments/assets/8165f7c0-b1f5-45c9-8ea1-066e2e4bd544" />﻿# Medical Agent - 医疗健康智能问答系统
+ Medical Agent - 医疗健康智能问答系统
 
 一个基于 LangGraph + vLLM 的医疗健康智能问答系统。系统采用 **规则优先 + RAG 增强** 的混合架构，通过精确的数值规则层解决大模型对医疗数值不敏感及检索歧义问题，并实现会话记忆与上下文工程的结构化控制。
 
@@ -124,7 +124,7 @@ summary = _compress_history(older)     # 压缩成摘要
 if state.episodic_summary:
     summary = state.episodic_summary + " | " + summary
 
-<img width="3348" height="1386" alt="deepseek_mermaid_20260317_bd97a4" src="https://github.com/user-attachments/assets/d99f9d90-4f4f-429a-9a73-780372ca6260" />
+<img width="3348" height="1386" alt="deepseek_mermaid_20260317_bd97a4" src="https://github.com/user-attachments/assets/8165f7c0-b1f5-45c9-8ea1-066e2e4bd544" />﻿#
 
 ## SSE 流式输出
 SSE 先发送证据，再逐段返回答案，避免证据链错位。
