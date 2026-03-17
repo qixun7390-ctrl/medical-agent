@@ -83,7 +83,7 @@ flowchart LR
 - `E:\PythonProject2\app\storage\vector_store.py`
 - `E:\PythonProject2\app\kg\graph_store.py`
 
-## 三级记忆架构
+##  三级记忆架构
 
 系统实现了类人的三层记忆管理，确保长对话的连贯性与关键信息的持久化。
 
@@ -123,8 +123,10 @@ summary = _compress_history(older)     # 压缩成摘要
 # 合并 Episodic 记忆
 if state.episodic_summary:
     summary = state.episodic_summary + " | " + summary
+```
 
-<img width="3348" height="1386" alt="deepseek_mermaid_20260317_bd97a4" src="https://github.com/user-attachments/assets/8165f7c0-b1f5-45c9-8ea1-066e2e4bd544" />﻿#
+<img width="3348" height="1386" alt="deepseek_mermaid_20260317_bd97a4" src="https://github.com/user-attachments/assets/f7a5486b-7539-40dc-9284-1dbbd97e62c0" />
+
 
 ## SSE 流式输出
 SSE 先发送证据，再逐段返回答案，避免证据链错位。
@@ -192,6 +194,7 @@ python -m uvicorn app.main:create_app --factory --host 0.0.0.0 --port 8000
 
 ## 结果展示:
 <img width="1905" height="908" alt="a59419dad7d049c22f96708b9cc40627" src="https://github.com/user-attachments/assets/560e9919-8336-49a7-8431-10d47f114152" />
+
 <img width="1855" height="440" alt="0a6d837aaff356db86156783a81e1d4a" src="https://github.com/user-attachments/assets/a2217fdd-ae7f-4ce2-8072-4004fcc5f112" />
 
 ## 项目结构
