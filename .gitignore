@@ -1,0 +1,26 @@
+﻿# Project
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Env
+.venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Data / models / caches
+medical-agent/data/
+medical-agent/model/
+medical-agent/.hf_cache/
+
+# OS
+.DS_Store
+Thumbs.db

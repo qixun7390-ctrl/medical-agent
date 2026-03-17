@@ -1,0 +1,143 @@
+﻿{
+  "version": 1,
+  "rules": [
+    {
+      "name": "high_fever",
+      "type": "numeric",
+      "slot": "temp_c",
+      "op": ">=",
+      "value": 39.0,
+      "add_queries": [
+        "高热 危险信号 急诊",
+        "发热 处理 原则",
+        "高热 体温 39 处理"
+      ],
+      "guidance": "体温≥39℃属于高热，若伴随精神差、抽搐、呼吸困难等症状需尽快就医。",
+      "evidence": "成人体温高于103°F(39.4℃)通常建议联系医生评估；成人在103°F以上常表现明显不适。",
+      "sources": [
+        "Mayo Clinic: Fever First Aid https://www.mayoclinic.org/health/first-aid-fever/FA00063",
+        "Cleveland Clinic: Fever Symptoms & Causes https://my.clevelandclinic.org/health/symptoms/10880-fever"
+      ]
+    },
+    {
+      "name": "moderate_fever",
+      "type": "numeric",
+      "slot": "temp_c",
+      "op": ">=",
+      "value": 38.0,
+      "add_queries": [
+        "发热 38度 处理",
+        "低热 中度发热 居家处理",
+        "发热 观察 指标"
+      ],
+      "guidance": "体温约38℃属于中度发热，若无严重不适可先居家观察、补液休息，持续或加重需就医。",
+      "evidence": "体温在38℃左右多为中度发热，若症状持续或伴随明显不适建议就医评估。",
+      "sources": [
+        "Mayo Clinic: Fever First Aid https://www.mayoclinic.org/health/first-aid-fever/FA00063",
+        "Cleveland Clinic: Fever Symptoms & Causes https://my.clevelandclinic.org/health/symptoms/10880-fever"
+      ]
+    },
+    {
+      "name": "fever_40_exact",
+      "type": "numeric",
+      "slot": "temp_c",
+      "op": ">=",
+      "value": 40.0,
+      "add_queries": [
+        "体温 40度 处理",
+        "超高热 急诊 指征"
+      ],
+      "guidance": "体温达到40℃属于超高热，建议尽快就医或急诊处理。",
+      "evidence": "体温≥40℃属于超高热，需及时就医评估。",
+      "sources": [
+        "Johns Hopkins Medicine: Fever in Children https://www.hopkinsmedicine.org/health/conditions-and-diseases/fever-in-children"
+      ]
+    },
+    {
+      "name": "very_high_fever",
+      "type": "numeric",
+      "slot": "temp_c",
+      "op": ">=",
+      "value": 40.0,
+      "add_queries": [
+        "超高热 紧急就医",
+        "高热 抽搐 急诊"
+      ],
+      "guidance": "体温≥40℃属于超高热，建议尽快就医或急诊处理。",
+      "evidence": "儿童反复高热≥104°F(40℃)建议尽快就医评估。",
+      "sources": [
+        "Johns Hopkins Medicine: Fever in Children https://www.hopkinsmedicine.org/health/conditions-and-diseases/fever-in-children"
+      ]
+    },
+    {
+      "name": "low_spo2",
+      "type": "numeric",
+      "slot": "spo2",
+      "op": "<=",
+      "value": 92,
+      "add_queries": [
+        "低氧 血氧 处理",
+        "呼吸困难 急诊 指征"
+      ],
+      "guidance": "血氧≤92%提示低氧，需评估呼吸状况，必要时急诊。"
+    },
+    {
+      "name": "high_bp",
+      "type": "numeric",
+      "slot": "sbp",
+      "op": ">=",
+      "value": 180,
+      "add_queries": [
+        "高血压 急症 处理",
+        "血压 180 急诊"
+      ],
+      "guidance": "收缩压≥180mmHg需警惕高血压急症，请及时就医。"
+    },
+    {
+      "name": "fever_keywords",
+      "type": "keyword",
+      "keywords": [
+        "发烧",
+        "发热",
+        "高烧",
+        "低烧",
+        "低热"
+      ],
+      "add_queries": [
+        "发热 原因 常见",
+        "发热 需要做哪些检查",
+        "发热 何时就医"
+      ],
+      "guidance": "出现发热需结合持续时间、伴随症状和既往史综合判断。"
+    },
+    {
+      "name": "chest_pain",
+      "type": "keyword",
+      "keywords": [
+        "胸痛",
+        "胸闷",
+        "心前区疼痛"
+      ],
+      "add_queries": [
+        "胸痛 危险信号 急诊",
+        "心梗 早期症状"
+      ],
+      "guidance": "出现胸痛/胸闷需警惕心血管急症，建议及时就医。"
+    },
+    {
+      "name": "neuro_red_flags",
+      "type": "keyword",
+      "keywords": [
+        "意识障碍",
+        "抽搐",
+        "昏迷",
+        "剧烈头痛"
+      ],
+      "add_queries": [
+        "意识障碍 急诊",
+        "抽搐 处理"
+      ],
+      "guidance": "存在神经系统危险信号，建议立即就医。"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+﻿[project]
+name = "medical-agent"
+version = "0.1.0"
+description = "Medical agent with Agentic RAG, KG, and multi-layer memory"
+requires-python = ">=3.10"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "httpx>=0.27",
+  "orjson>=3.9",
+  "prometheus-client>=0.20",
+  "loguru>=0.7",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "asyncpg>=0.29",
+  "redis>=5.0",
+  "faiss-cpu>=1.8.0",
+  "sentence-transformers>=2.6",
+  "networkx>=3.2",
+  "langgraph>=0.2.21",
+  "python-multipart>=0.0.9",
+  "tenacity>=8.2",
+  "pyyaml>=6.0"
+]
+
+[tool.uvicorn]
+factory = true
+host = "0.0.0.0"
+port = 8000
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.black]
+line-length = 100
